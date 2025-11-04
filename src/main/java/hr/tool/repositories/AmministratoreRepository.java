@@ -5,12 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import hr.tool.models.Amministratore;
 
+import java.util.Optional;
+
 public interface AmministratoreRepository extends JpaRepository<Amministratore, Long> {
 
-	@Query(
-			" SELECT idAmministratore FROM Amministratore " +
-			" WHERE email = :email AND password = :password "
-	)
-	public Long login(String email, String password);
+	public Optional<Amministratore> findByEmail(String email);
 	
 }
