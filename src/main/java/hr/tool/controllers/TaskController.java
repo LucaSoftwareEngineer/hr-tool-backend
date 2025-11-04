@@ -1,6 +1,8 @@
 package hr.tool.controllers;
 
+import hr.tool.dto.JsonEsito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,13 +20,13 @@ public class TaskController {
 	TaskService taskService;
 	
 	@PostMapping("api/task/inserisci")
-	public Boolean inserisci(@RequestBody JsonInserisciTask json) {
-		return taskService.inserisci(json);
+	public ResponseEntity<JsonEsito> inserisci(@RequestBody JsonInserisciTask json) {
+		return ResponseEntity.ok(new JsonEsito(taskService.inserisci(json)));
 	}
 	
 	@DeleteMapping("api/task/elimina")
-	public Boolean elimina(@RequestParam Long idTask) {
-		return taskService.elimina(idTask);
+	public ResponseEntity<JsonEsito> elimina(@RequestParam Long idTask) {
+		return ResponseEntity.ok(new JsonEsito(taskService.elimina(idTask)));
 	}
 	
 }

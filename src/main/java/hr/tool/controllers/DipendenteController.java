@@ -1,6 +1,8 @@
 package hr.tool.controllers;
 
+import hr.tool.dto.JsonEsito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +19,13 @@ public class DipendenteController {
 	DipendenteService dipendenteService;
 
 	@PostMapping("api/dipendente/inserisci")
-	public Boolean inserisci(@RequestBody JsonDipendente json) {
-		return dipendenteService.inserisci(json);
+	public ResponseEntity<JsonEsito> inserisci(@RequestBody JsonDipendente json) {
+		return ResponseEntity.ok(new JsonEsito(dipendenteService.inserisci(json)));
 	}
 	
 	@DeleteMapping("api/dipendente/elimina")
-	public Boolean elimina(@RequestParam Long idDipendente) {
-		return dipendenteService.elimina(idDipendente);
+	public ResponseEntity<JsonEsito> elimina(@RequestParam Long idDipendente) {
+		return ResponseEntity.ok(new JsonEsito(dipendenteService.elimina(idDipendente)));
 	}
 	
 }

@@ -1,6 +1,8 @@
 package hr.tool.controllers;
 
+import hr.tool.dto.JsonEsito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +19,13 @@ public class PresenzaController {
 	PresenzaService presenzaService;
 	
 	@PostMapping("api/presenza/inserisci")
-	public Boolean inserisci(@RequestBody JsonInserisciPresenza json) {
-		return presenzaService.inserisci(json);
+	public ResponseEntity<JsonEsito> inserisci(@RequestBody JsonInserisciPresenza json) {
+		return ResponseEntity.ok(new JsonEsito(presenzaService.inserisci(json)));
 	}
 	
 	@DeleteMapping("api/presenza/elimina")
-	public Boolean elimina(@RequestParam Long idPresenza) {
-		return presenzaService.elimina(idPresenza);
+	public ResponseEntity<JsonEsito> elimina(@RequestParam Long idPresenza) {
+		return ResponseEntity.ok(new JsonEsito(presenzaService.elimina(idPresenza)));
 	}
 	
 }
